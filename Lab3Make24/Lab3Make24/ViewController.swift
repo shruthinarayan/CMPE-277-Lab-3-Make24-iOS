@@ -8,14 +8,6 @@
 
 import UIKit
 
-//enum Operation:String {
-//    case Add = "+"
-//    case Subtract = "-"
-//    case Multiply = "*"
-//    case Divide = "/"
-//    case Null = "Null"
-//}
-
 class ViewController: UIViewController {
     
     //UI connections
@@ -44,14 +36,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var delButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    var n1 = "0", n2 = "0", n3 = "0", n4 = "0"
+    var n1 = 0, n2 = 0, n3 = 0, n4 = 0
     var str = ""
-    var res = ""
-    //var attemptCount = 0, successCount = 0, skipCount = 0
-    //var currentOperation:Operation = .Null
+    var attemptCount = 0, successCount = 0, skipCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+          // Do any additional setup after loading the view, typically from a nib.
         
         //Adding borders
         timeLabel.layer.borderWidth = 1.0
@@ -71,13 +62,8 @@ class ViewController: UIViewController {
         rbracButton.layer.borderWidth = 1.0
         delButton.layer.borderWidth = 1.0
         doneButton.layer.borderWidth = 1.0
-        
-        n1Button.setTitle(n1, for: .normal)
-        n2Button.setTitle(n2, for: .normal)
-        n3Button.setTitle(n3, for: .normal)
-        n4Button.setTitle(n4, for: .normal)
-        
-        // Do any additional setup after loading the view, typically from a nib.
+
+        randomNumberGenerator()
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,36 +83,32 @@ class ViewController: UIViewController {
     @IBAction func skipAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
-        
-        //////////////change numbers///////////////////////////////////////
-        
-        n1Button.isEnabled = true
-        n2Button.isEnabled = true
-        n3Button.isEnabled = true
-        n4Button.isEnabled = true
+        randomNumberGenerator()
     }
     
+    
     @IBAction func n1Action(_ sender: UIButton) {
-        str += n1
+        str += "\(n1)"
         stringLabel.text = str
         n1Button.isEnabled = false
     }
     @IBAction func n2Action(_ sender: UIButton) {
-        str += n2
+        str += "\(n2)"
         stringLabel.text = str
         n2Button.isEnabled = false
     }
-   
     @IBAction func n3Action(_ sender: UIButton) {
-        str += n3
+        str += "\(n3)"
         stringLabel.text = str
         n3Button.isEnabled = false
     }
     @IBAction func n4Action(_ sender: UIButton) {
-        str += n4
+        str += "\(n4)"
         stringLabel.text = str
         n4Button.isEnabled = false
     }
+    
+    
     @IBAction func addAction(_ sender: UIButton) {
         str += "+"
         stringLabel.text = str
@@ -151,13 +133,39 @@ class ViewController: UIViewController {
         str += ")"
         stringLabel.text = str
     }
+    
+    
     @IBAction func delAction(_ sender: UIButton) {
         //////////////////delete one input//////////////////////
         stringLabel.text = str
     }
+    
+    
     @IBAction func doneAction(_ sender: UIButton) {
         /////////////////calculate//////////////////////////////
     }
+   
+    
+    func randomNumberGenerator() {
+        //generate numbers 1-9
+        n1 = Int(arc4random_uniform(9) + 1)
+        n2 = Int(arc4random_uniform(9) + 1)
+        n3 = Int(arc4random_uniform(9) + 1)
+        n4 = Int(arc4random_uniform(9) + 1)
+        
+        //set value on buttons
+        n1Button.setTitle("\(n1)", for: .normal)
+        n2Button.setTitle("\(n2)", for: .normal)
+        n3Button.setTitle("\(n3)", for: .normal)
+        n4Button.setTitle("\(n4)", for: .normal)
+        
+        //enable buttons
+        n1Button.isEnabled = true
+        n2Button.isEnabled = true
+        n3Button.isEnabled = true
+        n4Button.isEnabled = true
+    }
+    
     
 }
 
