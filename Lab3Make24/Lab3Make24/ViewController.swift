@@ -8,13 +8,13 @@
 
 import UIKit
 
-enum Operation:String {
-    case Add = "+"
-    case Subtract = "-"
-    case Multiply = "*"
-    case Divide = "/"
-    case Null = "Null"
-}
+//enum Operation:String {
+//    case Add = "+"
+//    case Subtract = "-"
+//    case Multiply = "*"
+//    case Divide = "/"
+//    case Null = "Null"
+//}
 
 class ViewController: UIViewController {
     
@@ -89,11 +89,21 @@ class ViewController: UIViewController {
     @IBAction func clearAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
+        n1Button.isEnabled = true
+        n2Button.isEnabled = true
+        n3Button.isEnabled = true
+        n4Button.isEnabled = true
     }
     @IBAction func skipAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
+        
         //////////////change numbers///////////////////////////////////////
+        
+        n1Button.isEnabled = true
+        n2Button.isEnabled = true
+        n3Button.isEnabled = true
+        n4Button.isEnabled = true
     }
     
     @IBAction func n1Action(_ sender: UIButton) {
