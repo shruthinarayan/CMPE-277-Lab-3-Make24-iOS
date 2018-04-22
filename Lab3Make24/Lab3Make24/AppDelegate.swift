@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Make24
+//  Lab3Make24
 //
-//  Created by Yingran Huang on 4/10/18.
-//  Copyright © 2018 CMPE277. All rights reserved.
+//  Created by Shruthi Narayan on 4/20/18.
+//  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
 import UIKit

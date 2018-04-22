@@ -1,15 +1,15 @@
 //
-//  Make24Tests.swift
-//  Make24Tests
+//  Lab3Make24Tests.swift
+//  Lab3Make24Tests
 //
-//  Created by Yingran Huang on 4/10/18.
-//  Copyright © 2018 CMPE277. All rights reserved.
+//  Created by Shruthi Narayan on 4/20/18.
+//  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
 import XCTest
-@testable import Make24
+@testable import Lab3Make24
 
-class Make24Tests: XCTestCase {
+class Lab3Make24Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()

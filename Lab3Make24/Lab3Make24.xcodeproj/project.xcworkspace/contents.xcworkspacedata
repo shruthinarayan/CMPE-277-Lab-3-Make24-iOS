@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Make24.xcodeproj">
+      location = "self:Lab3Make24.xcodeproj">
    </FileRef>
 </Workspace>
