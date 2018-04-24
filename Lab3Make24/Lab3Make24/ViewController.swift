@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class ViewController: UIViewController {
     
     //UI connections
@@ -38,11 +37,13 @@ class ViewController: UIViewController {
     
     var n1 = 0, n2 = 0, n3 = 0, n4 = 0
     var str = ""
-    var attemptCount = 0, successCount = 0, skipCount = 0
+    var timer = Timer()
+    var time = 0
+    //var attemptCount = 0, successCount = 0, skipCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-          // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib.
         
         //Adding borders
         timeLabel.layer.borderWidth = 1.0
@@ -62,16 +63,19 @@ class ViewController: UIViewController {
         rbracButton.layer.borderWidth = 1.0
         delButton.layer.borderWidth = 1.0
         doneButton.layer.borderWidth = 1.0
-
+        
         randomNumberGenerator()
+        runTimer()
+        
+        //navigationDrawer.constant = -160
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     //Button Actions
+    @IBAction func menuAction(_ sender: UIBarButtonItem) {
+    }
+    
+    
     @IBAction func clearAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
@@ -80,7 +84,10 @@ class ViewController: UIViewController {
         n3Button.isEnabled = true
         n4Button.isEnabled = true
     }
+    
+    
     @IBAction func skipAction(_ sender: UIBarButtonItem) {
+        time = 0
         str = ""
         stringLabel.text = str
         randomNumberGenerator()
@@ -136,16 +143,38 @@ class ViewController: UIViewController {
     
     
     @IBAction func delAction(_ sender: UIButton) {
-        //////////////////delete one input//////////////////////
-        stringLabel.text = str
+        if !(str.isEmpty) {
+            
+            let last = str.last!
+            
+            if ((last >= "1") && (last <= "9")) {
+                
+                let delNumber = Int(String(last))
+                
+                if ((delNumber == n1) && (n1Button.isEnabled == false))   {
+                    n1Button.isEnabled = true
+                }
+                else if ((delNumber == n2) && (n2Button.isEnabled == false)) {
+                    n2Button.isEnabled = true
+                }
+                else if ((delNumber == n3) && (n3Button.isEnabled == false)) {
+                    n3Button.isEnabled = true
+                }
+                else if ((delNumber == n4) && (n4Button.isEnabled == false)) {
+                    n4Button.isEnabled = true
+                }
+            }
+            str.remove(at: str.index(before: str.endIndex))
+            stringLabel.text = str
+        }
     }
     
     
     @IBAction func doneAction(_ sender: UIButton) {
         /////////////////calculate//////////////////////////////
     }
-   
     
+    //generate random numbers
     func randomNumberGenerator() {
         //generate numbers 1-9
         n1 = Int(arc4random_uniform(9) + 1)
@@ -166,6 +195,25 @@ class ViewController: UIViewController {
         n4Button.isEnabled = true
     }
     
+    //build a timer
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTime), userInfo: nil, repeats: true)
+    }
+    @objc func incrementTime() {
+        time += 1     //increment the seconds
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        if seconds < 10 {
+            timeLabel.text = "\(minutes):0\(seconds)"
+        }
+        else{
+            timeLabel.text = "\(minutes):\(seconds)"
+        }
+    }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 
