@@ -66,16 +66,10 @@ class ViewController: UIViewController {
         
         randomNumberGenerator()
         runTimer()
-        
-        //navigationDrawer.constant = -160
     }
     
     
     //Button Actions
-    @IBAction func menuAction(_ sender: UIBarButtonItem) {
-    }
-    
-    
     @IBAction func clearAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
