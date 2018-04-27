@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     //UI connections
     @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var skipButton: UIBarButtonItem!
+    @IBOutlet weak var showMeButton: UIBarButtonItem!
+    @IBOutlet weak var assignNumbersButton: UIBarButtonItem!
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var successLabel: UILabel!
@@ -35,6 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var delButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
+    //declare variables
     var n1 = 0, n2 = 0, n3 = 0, n4 = 0
     var str = ""
     var timer = Timer()
@@ -50,26 +53,29 @@ class ViewController: UIViewController {
         successLabel.layer.borderWidth = 1.0
         attemptLabel.layer.borderWidth = 1.0
         skippedLabel.layer.borderWidth = 1.0
+
         stringLabel.layer.borderWidth = 1.0
+
         n1Button.layer.borderWidth = 1.0
         n2Button.layer.borderWidth = 1.0
         n3Button.layer.borderWidth = 1.0
         n4Button.layer.borderWidth = 1.0
+
         addButton.layer.borderWidth = 1.0
         subButton.layer.borderWidth = 1.0
         mulButton.layer.borderWidth = 1.0
         divButton.layer.borderWidth = 1.0
+
         lbracButton.layer.borderWidth = 1.0
         rbracButton.layer.borderWidth = 1.0
         delButton.layer.borderWidth = 1.0
         doneButton.layer.borderWidth = 1.0
-        
+
         randomNumberGenerator()
         runTimer()
     }
     
-    
-    //Button Actions
+    //////////Button Actions//////////
     @IBAction func clearAction(_ sender: UIBarButtonItem) {
         str = ""
         stringLabel.text = str
@@ -85,6 +91,14 @@ class ViewController: UIViewController {
         str = ""
         stringLabel.text = str
         randomNumberGenerator()
+    }
+    
+    
+    @IBAction func showMeAction(_ sender: UIBarButtonItem) {
+    }
+    
+    
+    @IBAction func assignNumbersAction(_ sender: UIBarButtonItem) {
     }
     
     
@@ -165,10 +179,9 @@ class ViewController: UIViewController {
     
     
     @IBAction func doneAction(_ sender: UIButton) {
-        /////////////////calculate//////////////////////////////
-    }
+         }
     
-    //generate random numbers
+    //////////Generate Random Numbers//////////
     func randomNumberGenerator() {
         //generate numbers 1-9
         n1 = Int(arc4random_uniform(9) + 1)
@@ -189,7 +202,7 @@ class ViewController: UIViewController {
         n4Button.isEnabled = true
     }
     
-    //build a timer
+    //////////Build a Timer//////////
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTime), userInfo: nil, repeats: true)
     }
@@ -204,7 +217,7 @@ class ViewController: UIViewController {
             timeLabel.text = "\(minutes):\(seconds)"
         }
     }
-    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
