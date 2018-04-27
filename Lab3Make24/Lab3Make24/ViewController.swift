@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     //declare variables
     var n1 = 0, n2 = 0, n3 = 0, n4 = 0
     var str = ""
+    var sol = " = 24"
     var timer = Timer()
     var time = 0
     //var attemptCount = 0, successCount = 0, skipCount = 0
@@ -96,7 +97,7 @@ class ViewController: UIViewController {
     
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
         // create the alert
-        let alert = UIAlertController(title: "Solution", message: "This is my message.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Solution", message: sol, preferredStyle: UIAlertControllerStyle.alert)
         // add an action (button)
         alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: nil))
         // show the alert
