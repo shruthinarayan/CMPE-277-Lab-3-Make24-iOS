@@ -95,6 +95,12 @@ class ViewController: UIViewController {
     
     
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
+        // create the alert
+        let alert = UIAlertController(title: "Solution", message: "This is my message.", preferredStyle: UIAlertControllerStyle.alert)
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: nil))
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -217,7 +223,14 @@ class ViewController: UIViewController {
             timeLabel.text = "\(minutes):\(seconds)"
         }
     }
-   
+    
+    //////////Find Solution//////////
+    
+    
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
