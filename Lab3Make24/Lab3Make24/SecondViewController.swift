@@ -8,12 +8,17 @@
 
 import UIKit
 
+
 class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var n1Picker: UIPickerView!
+
     
+    
+    
+    
+    @IBOutlet weak var n1Picker: UIPickerView!
     let n1pickerData = [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]
-    var n1Assign = 1, n2Assign=1, n3Assign=1, n4Assign=1
+    var n1Assign = 0, n2Assign=0, n3Assign=0, n4Assign=0
     
     @IBOutlet weak var setButton: UIButton!
     @IBOutlet weak var returnButton: UIButton!
@@ -66,18 +71,19 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    
     @IBAction func setAction(_ sender: UIButton) {
-        //        n1=n1Assign
-        //        n2=n2Assign
-        //        n3=n3Assign
-        //        n4=n4Assign
+
+        
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     /*
      // MARK: - Navigation
      
@@ -87,5 +93,4 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
      // Pass the selected object to the new view controller.
      }
      */
-    
 }

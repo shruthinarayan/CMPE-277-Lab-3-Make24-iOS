@@ -7,14 +7,10 @@
 //
 
 import UIKit
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    //UI connections
-    @IBOutlet weak var clearButton: UIBarButtonItem!
-    @IBOutlet weak var skipButton: UIBarButtonItem!
-    @IBOutlet weak var showMeButton: UIBarButtonItem!
-    @IBOutlet weak var assignNumbersButton: UIBarButtonItem!
-    
+    //////////UI connections//////////
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var successLabel: UILabel!
     @IBOutlet weak var attemptLabel: UILabel!
@@ -37,43 +33,49 @@ class ViewController: UIViewController {
     @IBOutlet weak var delButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    //declare variables
+    //////////Declare variables //////////
     var n1 = 0, n2 = 0, n3 = 0, n4 = 0
-    var str = ""
-    var sol = " = 24"
     var timer = Timer()
     var time = 0
-    //var attemptCount = 0, successCount = 0, skipCount = 0
+    var str = ""
+    var sol = ""
+    var attemptCount = 1, successCount = 0, skipCount = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //Adding borders
+        //////////Add Borders//////////
         timeLabel.layer.borderWidth = 1.0
         successLabel.layer.borderWidth = 1.0
         attemptLabel.layer.borderWidth = 1.0
         skippedLabel.layer.borderWidth = 1.0
-
+        
         stringLabel.layer.borderWidth = 1.0
-
+        
         n1Button.layer.borderWidth = 1.0
         n2Button.layer.borderWidth = 1.0
         n3Button.layer.borderWidth = 1.0
         n4Button.layer.borderWidth = 1.0
-
+        
         addButton.layer.borderWidth = 1.0
         subButton.layer.borderWidth = 1.0
         mulButton.layer.borderWidth = 1.0
         divButton.layer.borderWidth = 1.0
-
+        
         lbracButton.layer.borderWidth = 1.0
         rbracButton.layer.borderWidth = 1.0
         delButton.layer.borderWidth = 1.0
         doneButton.layer.borderWidth = 1.0
-
+        
+        //////////First Game on App Load//////////
         randomNumberGenerator()
+        setTitleEnableButtonsInit()
         runTimer()
+        
+        skippedLabel.text="\(skipCount)"
+        successLabel.text="\(successCount)"
     }
     
     //////////Button Actions//////////
@@ -88,24 +90,47 @@ class ViewController: UIViewController {
     
     
     @IBAction func skipAction(_ sender: UIBarButtonItem) {
-        time = 0
-        str = ""
-        stringLabel.text = str
+        skipCount+=1
+        //print("\(skipCount)")
+        skippedLabel.text="\(skipCount)"
+        
         randomNumberGenerator()
+        setTitleEnableButtonsInit()
     }
     
     
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
-        // create the alert
-        let alert = UIAlertController(title: "Solution", message: sol, preferredStyle: UIAlertControllerStyle.alert)
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: nil))
-        // show the alert
+        
+        let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+            self.randomNumberGenerator()
+            self.setTitleEnableButtonsInit()
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     
     
     @IBAction func assignNumbersAction(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "Assign Numbers", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        alert.isModalInPopover = true
+        let pickerFrame = UIPickerView(frame: CGRect(x: 20, y: 20, width: 250, height: 140))
+        alert.view.addSubview(pickerFrame)
+        pickerFrame.dataSource = self
+        pickerFrame.delegate = self
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Set", style: .default, handler: { (UIAlertAction) in
+            
+            //print("You selected: \(self.n1Assign) \(self.n2Assign) \(self.n3Assign) \(self.n4Assign)")
+            self.n1=self.n1Assign
+            self.n2=self.n2Assign
+            self.n3=self.n3Assign
+            self.n4=self.n4Assign
+            
+            self.setTitleEnableButtonsInit()
+        }))
+        self.present(alert,animated: true, completion: nil )
     }
     
     
@@ -186,7 +211,11 @@ class ViewController: UIViewController {
     
     
     @IBAction func doneAction(_ sender: UIButton) {
-         }
+        attemptCount+=1
+        //print("\(attemptCount)")
+        attemptLabel.text="\(attemptCount)"
+        
+    }
     
     //////////Generate Random Numbers//////////
     func randomNumberGenerator() {
@@ -195,7 +224,8 @@ class ViewController: UIViewController {
         n2 = Int(arc4random_uniform(9) + 1)
         n3 = Int(arc4random_uniform(9) + 1)
         n4 = Int(arc4random_uniform(9) + 1)
-        
+    }
+    func setTitleEnableButtonsInit(){
         //set value on buttons
         n1Button.setTitle("\(n1)", for: .normal)
         n2Button.setTitle("\(n2)", for: .normal)
@@ -207,6 +237,14 @@ class ViewController: UIViewController {
         n2Button.isEnabled = true
         n3Button.isEnabled = true
         n4Button.isEnabled = true
+        
+        time = 0
+        str = ""
+        stringLabel.text = str
+        
+        attemptCount=1
+        //print("\(attemptCount)")
+        attemptLabel.text="\(attemptCount)"
     }
     
     //////////Build a Timer//////////
@@ -225,12 +263,48 @@ class ViewController: UIViewController {
         }
     }
     
-    //////////Find Solution//////////
     
+    //////////Assign Numbers Alert-Picker//////////
+    var n1pickerData = [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]
+    var pickerView = UIPickerView()
+    var n1Assign = 1, n2Assign=1, n3Assign=1, n4Assign=1
     
-    
-    
-    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return n1pickerData.count
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return n1pickerData[component].count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(n1pickerData[component] [row])
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if (component == 0)
+        {
+            n1Assign=n1pickerData[0][row]
+            //print("n1: \(n1Assign)")
+            //self.view.backgroundColor = UIColor.black
+        }
+        else if (component == 1)
+        {
+            n2Assign=n1pickerData[1][row]
+            //self.view.backgroundColor = UIColor.blue
+            //print("n2: \(n2Assign)")
+        }
+        else if (component == 2)
+        {
+            n3Assign=n1pickerData[2][row]
+            //self.view.backgroundColor = UIColor.brown
+            //print("n3: \(n3Assign)")
+        }
+        else
+        {
+            n4Assign=n1pickerData[3][row]
+            //self.view.backgroundColor = UIColor.cyan
+            //print("n4: \(n4Assign)")
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
