@@ -6,6 +6,11 @@
 //  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
+////////////////Done- Snackbar“Incorrect. Please try again!” /
+//////////////showme button--solution / “Sorry, there are actually no solutions”
+//////////////calculate solution
+
+
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -103,6 +108,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
         
+        ////////////////getsolution string///////////////////
+        
         let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
             self.randomNumberGenerator()
@@ -141,28 +148,24 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         stringLabel.text = str
         n1Button.isEnabled = false
         doneButton.isEnabled = true
-        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n2Action(_ sender: UIButton) {
         str += "\(n2)"
         stringLabel.text = str
         n2Button.isEnabled = false
         doneButton.isEnabled = true
-        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n3Action(_ sender: UIButton) {
         str += "\(n3)"
         stringLabel.text = str
         n3Button.isEnabled = false
         doneButton.isEnabled = true
-        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n4Action(_ sender: UIButton) {
         str += "\(n4)"
         stringLabel.text = str
         n4Button.isEnabled = false
         doneButton.isEnabled = true
-        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     
     
@@ -195,12 +198,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func delAction(_ sender: UIButton) {
         if !(str.isEmpty) {
             
-            let last = str.last!
+            if str.count == 1 {
+                doneButton.isEnabled = false
+            }
             
+            let last = str.last!
             if ((last >= "1") && (last <= "9")) {
                 
                 let delNumber = Int(String(last))
-                
                 if ((delNumber == n1) && (n1Button.isEnabled == false))   {
                     n1Button.isEnabled = true
                 }
@@ -225,16 +230,48 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //print("\(attemptCount)")
         attemptLabel.text="\(attemptCount)"
         
+        ////////////////solve equation///////////////////
+        //let isRight = calculateResult()
+        //if isRight == true && btnNum1.isEnabled == false && btnNum2.isEnabled == false && btnNum3.isEnabled == false && btnNum4.isEnabled == false
+        //{
+        
+        
+        /*
+        let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+            self.randomNumberGenerator()
+            self.setTitleEnableButtonsInit()
+            self.successCount += 1
+            self.successLabel.text = "\(self.successCount)"
+        }))
+        self.present(alert, animated: true, completion: nil) */
+        
+        
+       // }
+//    else
+//    {
+//            let snackbar = TTGSnackbar(message: "Incorrect. Please try again!", duration: .middle)
+//            snackbar.show()
+//        }
+        
     }
     
     //////////Generate Random Numbers//////////
     func randomNumberGenerator() {
         //generate numbers 1-9
+        
+        //while true {
         n1 = Int(arc4random_uniform(9) + 1)
         n2 = Int(arc4random_uniform(9) + 1)
         n3 = Int(arc4random_uniform(9) + 1)
         n4 = Int(arc4random_uniform(9) + 1)
+        
+        //        if getSolution(a: num1, b: num2, c: num3, d: num4).isEmpty == false {
+        //            break
+        //        }
+        //    }
     }
+    
     func setTitleEnableButtonsInit(){
         //set value on buttons
         n1Button.setTitle("\(n1)", for: .normal)
@@ -248,9 +285,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         n3Button.isEnabled = true
         n4Button.isEnabled = true
         
+        //disable done button
         doneButton.isEnabled = false
-        //doneButton.setTitleColor(UIColor.gray, for: .normal)
-
+        
+        //init time,string,attempt
         time = 0
         str = ""
         stringLabel.text = str
