@@ -53,9 +53,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66182926630000005" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="DONE">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
                                 <connections>
                                     <action selector="doneAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nP0-0w-4uq"/>
                                 </connections>

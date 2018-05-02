@@ -39,6 +39,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var time = 0
     var str = ""
     var sol = ""
+    var done="DONE"
     var attemptCount = 1, successCount = 0, skipCount = 0
     
     
@@ -76,6 +77,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         skippedLabel.text="\(skipCount)"
         successLabel.text="\(successCount)"
+        doneButton.setTitle("\(done)", for: .normal)
     }
     
     //////////Button Actions//////////
@@ -138,21 +140,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         str += "\(n1)"
         stringLabel.text = str
         n1Button.isEnabled = false
+        doneButton.isEnabled = true
+        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n2Action(_ sender: UIButton) {
         str += "\(n2)"
         stringLabel.text = str
         n2Button.isEnabled = false
+        doneButton.isEnabled = true
+        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n3Action(_ sender: UIButton) {
         str += "\(n3)"
         stringLabel.text = str
         n3Button.isEnabled = false
+        doneButton.isEnabled = true
+        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     @IBAction func n4Action(_ sender: UIButton) {
         str += "\(n4)"
         stringLabel.text = str
         n4Button.isEnabled = false
+        doneButton.isEnabled = true
+        //doneButton.setTitleColor(UIColor.black, for: .normal)
     }
     
     
@@ -238,6 +248,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         n3Button.isEnabled = true
         n4Button.isEnabled = true
         
+        doneButton.isEnabled = false
+        //doneButton.setTitleColor(UIColor.gray, for: .normal)
+
         time = 0
         str = ""
         stringLabel.text = str
