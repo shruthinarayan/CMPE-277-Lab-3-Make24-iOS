@@ -1,0 +1,6 @@
+framework module Pods_Lab3Make24_Lab3Make24Tests {
+  umbrella header "Pods-Lab3Make24-Lab3Make24Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

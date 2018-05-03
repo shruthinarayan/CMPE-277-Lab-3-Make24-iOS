@@ -6,12 +6,11 @@
 //  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
-////////////////Done- Snackbar“Incorrect. Please try again!” /
-//////////////showme button--solution / “Sorry, there are actually no solutions”
 //////////////calculate solution
-
+//show me// random// done
 
 import UIKit
+import NotificationBannerSwift
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -93,6 +92,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         n2Button.isEnabled = true
         n3Button.isEnabled = true
         n4Button.isEnabled = true
+        
+        doneButton.isEnabled = false
     }
     
     
@@ -108,14 +109,34 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
         
-        ////////////////getsolution string///////////////////
+        ////////////////Alert///////////////////
+        //let result = getSolution(a: num1, b: num2, c: num3, d: num4)
+        //if result.isEmpty == false
+        //{
         
-        let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-            self.randomNumberGenerator()
-            self.setTitleEnableButtonsInit()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        /*
+            let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
+            self.present(alert, animated: true, completion: nil)
+       */
+        
+    //}
+     //   else
+            //{
+        
+        /*
+        let alert = UIAlertController(title: "Solution", message: "Sorry, there are actually no solutions", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
+            self.present(alert, animated: true, completion: nil)
+       */
+        
+        //}
+    
+        self.randomNumberGenerator()
+        self.setTitleEnableButtonsInit()
+        self.skipCount+=1
+        //print("\(skipCount)")
+        self.skippedLabel.text="\(self.skipCount)"
     }
     
     
@@ -138,6 +159,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.n4=self.n4Assign
             
             self.setTitleEnableButtonsInit()
+            
+            self.skipCount+=1
+            //print("\(skipCount)")
+            self.skippedLabel.text="\(self.skipCount)"
         }))
         self.present(alert,animated: true, completion: nil )
     }
@@ -230,29 +255,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //print("\(attemptCount)")
         attemptLabel.text="\(attemptCount)"
         
-        ////////////////solve equation///////////////////
+        ////////////////Alert & NotificationBanner///////////////////
         //let isRight = calculateResult()
-        //if isRight == true && btnNum1.isEnabled == false && btnNum2.isEnabled == false && btnNum3.isEnabled == false && btnNum4.isEnabled == false
+       // if isRight == true && btnNum1.isEnabled == false && btnNum2.isEnabled == false && btnNum3.isEnabled == false && btnNum4.isEnabled == false
         //{
-        
-        
-        /*
-        let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-            self.randomNumberGenerator()
-            self.setTitleEnableButtonsInit()
-            self.successCount += 1
-            self.successLabel.text = "\(self.successCount)"
-        }))
-        self.present(alert, animated: true, completion: nil) */
-        
-        
-       // }
-//    else
-//    {
-//            let snackbar = TTGSnackbar(message: "Incorrect. Please try again!", duration: .middle)
-//            snackbar.show()
-//        }
+            /*
+             let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
+             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+             self.randomNumberGenerator()
+             self.setTitleEnableButtonsInit()
+             self.successCount += 1
+             self.successLabel.text = "\(self.successCount)"
+             }))
+             self.present(alert, animated: true, completion: nil)
+             */
+       //}
+        //else
+        //{
+       /*
+            let banner = NotificationBanner(title: "Incorrect.", subtitle: "Please try again!", style: .danger)
+            banner.show(bannerPosition: .bottom)
+       */
+        //}
         
     }
     
@@ -356,6 +380,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //print("n4: \(n4Assign)")
         }
     }
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
