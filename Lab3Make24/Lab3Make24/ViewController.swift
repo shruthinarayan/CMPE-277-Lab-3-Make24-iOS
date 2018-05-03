@@ -6,11 +6,13 @@
 //  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
-//////////////calculate solution
-//show me// random// done
+//////////////FIX: calculate expression issue
+//////////////enable random for showme,done
+
 
 import UIKit
 import NotificationBannerSwift
+
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -38,7 +40,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var doneButton: UIButton!
     
     //////////Declare variables //////////
-    var n1 = 0, n2 = 0, n3 = 0, n4 = 0
+    var n1: Double = 0, n2: Double = 0, n3: Double = 0, n4: Double = 0
     var timer = Timer()
     var time = 0
     var str = ""
@@ -110,29 +112,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func showMeAction(_ sender: UIBarButtonItem) {
         
         ////////////////Alert///////////////////
-        //let result = getSolution(a: num1, b: num2, c: num3, d: num4)
-        //if result.isEmpty == false
-        //{
+        let sol = getSolution(a: n1, b: n2, c: n3, d: n4)
+        print ("\(n1) \(n2) \(n3) \(n4) \(sol)")
         
-        /*
+        if !(sol.isEmpty)
+        {
             let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
             self.present(alert, animated: true, completion: nil)
-       */
-        
-    //}
-     //   else
-            //{
-        
-        /*
-        let alert = UIAlertController(title: "Solution", message: "Sorry, there are actually no solutions", preferredStyle: UIAlertControllerStyle.alert)
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Solution", message: "Sorry, there are actually no solutions", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
             self.present(alert, animated: true, completion: nil)
-       */
+        }
         
-        //}
-    
-        self.randomNumberGenerator()
+        //self.randomNumberGenerator()
         self.setTitleEnableButtonsInit()
         self.skipCount+=1
         //print("\(skipCount)")
@@ -169,25 +165,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func n1Action(_ sender: UIButton) {
-        str += "\(n1)"
+        str += "\(Int(n1))"
         stringLabel.text = str
         n1Button.isEnabled = false
         doneButton.isEnabled = true
     }
     @IBAction func n2Action(_ sender: UIButton) {
-        str += "\(n2)"
+        str += "\(Int(n2))"
         stringLabel.text = str
         n2Button.isEnabled = false
         doneButton.isEnabled = true
     }
     @IBAction func n3Action(_ sender: UIButton) {
-        str += "\(n3)"
+        str += "\(Int(n3))"
         stringLabel.text = str
         n3Button.isEnabled = false
         doneButton.isEnabled = true
     }
     @IBAction func n4Action(_ sender: UIButton) {
-        str += "\(n4)"
+        str += "\(Int(n4))"
         stringLabel.text = str
         n4Button.isEnabled = false
         doneButton.isEnabled = true
@@ -230,7 +226,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let last = str.last!
             if ((last >= "1") && (last <= "9")) {
                 
-                let delNumber = Int(String(last))
+                let delNumber = Double(String(last))
                 if ((delNumber == n1) && (n1Button.isEnabled == false))   {
                     n1Button.isEnabled = true
                 }
@@ -255,53 +251,50 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //print("\(attemptCount)")
         attemptLabel.text="\(attemptCount)"
         
-        ////////////////Alert & NotificationBanner///////////////////
-        //let isRight = calculateResult()
-       // if isRight == true && btnNum1.isEnabled == false && btnNum2.isEnabled == false && btnNum3.isEnabled == false && btnNum4.isEnabled == false
-        //{
-            /*
-             let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
-             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-             self.randomNumberGenerator()
-             self.setTitleEnableButtonsInit()
-             self.successCount += 1
-             self.successLabel.text = "\(self.successCount)"
-             }))
-             self.present(alert, animated: true, completion: nil)
-             */
-       //}
-        //else
-        //{
-       /*
+        //////////Alert & NotificationBanner//////////
+        let done = calculateResult(exp: str)
+        print("\(done)")
+        if ((done == true) && (n1Button.isEnabled == false) && (n2Button.isEnabled == false) && (n3Button.isEnabled == false) && (n4Button.isEnabled == false))
+        {
+            let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                // self.randomNumberGenerator()
+                self.setTitleEnableButtonsInit()
+                self.successCount += 1
+                self.successLabel.text = "\(self.successCount)"
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else
+        {
             let banner = NotificationBanner(title: "Incorrect.", subtitle: "Please try again!", style: .danger)
             banner.show(bannerPosition: .bottom)
-       */
-        //}
-        
+        }
     }
     
     //////////Generate Random Numbers//////////
     func randomNumberGenerator() {
         //generate numbers 1-9
-        
-        //while true {
-        n1 = Int(arc4random_uniform(9) + 1)
-        n2 = Int(arc4random_uniform(9) + 1)
-        n3 = Int(arc4random_uniform(9) + 1)
-        n4 = Int(arc4random_uniform(9) + 1)
-        
-        //        if getSolution(a: num1, b: num2, c: num3, d: num4).isEmpty == false {
-        //            break
-        //        }
-        //    }
+        while (true) {
+            n1 = Double(arc4random_uniform(9) + 1)
+            n2 = Double(arc4random_uniform(9) + 1)
+            n3 = Double(arc4random_uniform(9) + 1)
+            n4 = Double(arc4random_uniform(9) + 1)
+            
+            let checkSol=getSolution(a: n1, b: n2, c: n3, d: n4)
+            if !(checkSol.isEmpty)
+            {
+                break
+            }
+        }
     }
     
     func setTitleEnableButtonsInit(){
         //set value on buttons
-        n1Button.setTitle("\(n1)", for: .normal)
-        n2Button.setTitle("\(n2)", for: .normal)
-        n3Button.setTitle("\(n3)", for: .normal)
-        n4Button.setTitle("\(n4)", for: .normal)
+        n1Button.setTitle("\(Int(n1))", for: .normal)
+        n2Button.setTitle("\(Int(n2))", for: .normal)
+        n3Button.setTitle("\(Int(n3))", for: .normal)
+        n4Button.setTitle("\(Int(n4))", for: .normal)
         
         //enable buttons
         n1Button.isEnabled = true
@@ -340,9 +333,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     //////////Assign Numbers Alert-Picker//////////
-    var n1pickerData = [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]
+    var n1pickerData:[[Int]] = [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]
     var pickerView = UIPickerView()
-    var n1Assign = 1, n2Assign=1, n3Assign=1, n4Assign=1
+    var n1Assign: Double = 1, n2Assign: Double=1, n3Assign: Double=1, n4Assign: Double=1
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return n1pickerData.count
@@ -357,33 +350,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     {
         if (component == 0)
         {
-            n1Assign=n1pickerData[0][row]
+            n1Assign=Double(n1pickerData[0][row])
             //print("n1: \(n1Assign)")
             //self.view.backgroundColor = UIColor.black
         }
         else if (component == 1)
         {
-            n2Assign=n1pickerData[1][row]
+            n2Assign=Double(n1pickerData[1][row])
             //self.view.backgroundColor = UIColor.blue
             //print("n2: \(n2Assign)")
         }
         else if (component == 2)
         {
-            n3Assign=n1pickerData[2][row]
+            n3Assign=Double(n1pickerData[2][row])
             //self.view.backgroundColor = UIColor.brown
             //print("n3: \(n3Assign)")
         }
         else
         {
-            n4Assign=n1pickerData[3][row]
+            n4Assign=Double(n1pickerData[3][row])
             //self.view.backgroundColor = UIColor.cyan
             //print("n4: \(n4Assign)")
         }
     }
-    
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

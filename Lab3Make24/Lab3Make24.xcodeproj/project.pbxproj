@@ -16,6 +16,7 @@
 		DD0090D5208AAD7600CB06AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD0090D4208AAD7600CB06AE /* Assets.xcassets */; };
 		DD0090D8208AAD7600CB06AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD0090D6208AAD7600CB06AE /* LaunchScreen.storyboard */; };
 		DD0090E3208AAD7600CB06AE /* Lab3Make24Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0090E2208AAD7600CB06AE /* Lab3Make24Tests.swift */; };
+		DDEE1359209AE5C40055B3C5 /* MakeNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEE1358209AE5C40055B3C5 /* MakeNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		DD0090DE208AAD7600CB06AE /* Lab3Make24Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Lab3Make24Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0090E2208AAD7600CB06AE /* Lab3Make24Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lab3Make24Tests.swift; sourceTree = "<group>"; };
 		DD0090E4208AAD7600CB06AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDEE1358209AE5C40055B3C5 /* MakeNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		DD0090CC208AAD7400CB06AE /* Lab3Make24 */ = {
 			isa = PBXGroup;
 			children = (
+				DDEE1358209AE5C40055B3C5 /* MakeNumber.swift */,
 				DD0090CD208AAD7400CB06AE /* AppDelegate.swift */,
 				DD0090CF208AAD7400CB06AE /* ViewController.swift */,
 				DD0090D1208AAD7400CB06AE /* Main.storyboard */,
@@ -326,6 +329,7 @@
 			files = (
 				DD0090D0208AAD7400CB06AE /* ViewController.swift in Sources */,
 				DD0090CE208AAD7400CB06AE /* AppDelegate.swift in Sources */,
+				DDEE1359209AE5C40055B3C5 /* MakeNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +492,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Lab3Make24/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = shruthi.Lab3Make24;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -503,7 +510,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Lab3Make24/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = shruthi.Lab3Make24;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -519,7 +529,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Lab3Make24Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = shruthi.Lab3Make24Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -536,7 +550,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Lab3Make24Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = shruthi.Lab3Make24Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

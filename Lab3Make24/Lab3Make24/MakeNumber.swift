@@ -1,4 +1,5 @@
 
+//////////SHOW ME//////////
 func eval(a: Double, b: Double, c: Double, d: Double, x: Character, y: Character, z: Character) -> String {
     if bingo(x: eval(num1: eval(num1: eval(num1: a, operater: x, num2: b), operater: y, num2: c), operater: z, num2: d))
     {
@@ -24,7 +25,6 @@ func eval(a: Double, b: Double, c: Double, d: Double, x: Character, y: Character
     
     return ""
 }
-
 
 func getSolution(a: Double, b: Double, c: Double, d: Double) -> String {
     var n: [Double] = [a, b, c, d]
@@ -70,7 +70,6 @@ func getSolution(a: Double, b: Double, c: Double, d: Double) -> String {
     return ""
 }
 
-
 func bingo(x: Double) -> Bool {
     
     return abs(x - 24) < 0.0000001
@@ -89,6 +88,132 @@ func eval(num1: Double, operater: Character, num2: Double) -> Double {
     }
 }
 
+//////////DONE//////////
+public struct Stack<T> {
+    fileprivate var array = [T]()
+    
+    public var isEmpty: Bool {
+        return array.isEmpty
+    }
+    
+    public var count: Int {
+        return array.count
+    }
+    
+    public mutating func push(_ element: T) {
+        array.append(element)
+    }
+    
+    public mutating func pop() -> T? {
+        return array.popLast()
+    }
+    
+    public var top: T? {
+        return array.last
+    }
+}
 
-let result = getSolution(a: 8, b: 1, c: 3, d: 4)
+func calculateResult(exp: String) -> Bool {
+    let postExpression = convertToPostFix(input: exp)
+    let result = calculate(input: postExpression)
+    return bingo(x: result)
+}
+
+func calculate(input: String) -> Double {
+    var stack = Stack<Double>()
+    var d1:Double = 0
+    var d2:Double = 0
+    var d3:Double = 0
+    for i in 0..<input.count {
+        let ch = Array(input)[i]
+        if ch >= "0" && ch <= "9" {
+            stack.push(Double(String(ch))!)
+        }
+        else {
+            if stack.isEmpty == false {
+                d2 = stack.pop()!
+            }
+            if stack.isEmpty == false {
+                d1 = stack.pop()!
+            }
+            switch ch {
+            case "+":
+                d3 = d1 + d2
+            case "-":
+                d3 = d1 - d2
+            case "×":
+                d3 = d1 * d2
+            default:
+                d3 = d1 / d2
+            }
+            stack.push(d3)
+        }
+    }
+    return stack.pop()!
+}
+
+
+func convertToPostFix(input: String) -> String {
+    var stringBuilder = ""
+    var operatorStack = Stack<Character>()
+    let length = input.count
+    for i in 0..<length {
+        let ch = Array(input)[i]
+        print("ch: \(ch)")
+        if ch >= "0" && ch <= "9" {
+            stringBuilder += String(ch)
+        }
+        //left bracket
+        if ch == "(" {
+            operatorStack.push(ch)
+        }
+        //operator
+        if isOperator(op: ch) {
+            if operatorStack.isEmpty == true {
+                operatorStack.push(ch)
+            }
+            else {
+                var stackTop = operatorStack.top
+                if priority(ch: ch) > priority(ch: stackTop!) {
+                    operatorStack.push(ch)
+                }
+                else {
+                    stackTop = operatorStack.pop()
+                    stringBuilder += String(stackTop!)
+                    operatorStack.push(ch)
+                }
+                
+            }
+        }
+        
+        //right bracket
+        if ch == ")" {
+            var top = operatorStack.pop()
+            while top != "(" {
+                stringBuilder += String(top!)
+                top = operatorStack.pop()
+            }
+        }
+        
+    }
+    while operatorStack.isEmpty == false {
+        stringBuilder += String(operatorStack.pop()!)
+    }
+    //print(stringBuilder)
+    return stringBuilder
+}
+
+func priority(ch: Character) -> Int {
+    if ch == "+" || ch == "-" {
+        return 1
+    }
+    if ch == "×" || ch == "÷" {
+        return 2
+    }
+    return 0
+}
+
+func isOperator(op: Character) -> Bool {
+    return (op == "+") || (op == "-") || (op == "×") || (op == "÷")
+}
 
