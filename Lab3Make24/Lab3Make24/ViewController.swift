@@ -267,6 +267,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //print("\(attemptCount)")
         attemptLabel.text="\(attemptCount)"
         
+        doneButton.isEnabled=false
+        
         let expression = NSExpression(format: str)
         print("\(expression)")
         let calculatedValue =  expression.expressionValue(with: nil, context:nil) as! Int    //force case it to an Int
