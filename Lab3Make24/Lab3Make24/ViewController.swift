@@ -120,7 +120,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let sol = getSolution(a: n1, b: n2, c: n3, d: n4)
         print ("\(n1) \(n2) \(n3) \(n4) \(sol)")
         
-        if !(sol.isEmpty)
+        if (sol.isEmpty==false)
         {
             let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:{ (UIAlertAction) in
@@ -232,13 +232,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func delAction(_ sender: UIButton) {
-        if !(str.isEmpty) {
+        if (str.isEmpty==false) {
             
             if str.count == 1 {
                 doneButton.isEnabled = false
             }
             
             let last = str.last!
+            
             if ((last >= "1") && (last <= "9")) {
                 
                 let delNumber = Double(String(last))
@@ -305,7 +306,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             n4 = Double(arc4random_uniform(9) + 1)
             
             let checkSol=getSolution(a: n1, b: n2, c: n3, d: n4)
-            if !(checkSol.isEmpty)
+            if (checkSol.isEmpty==false)
             {
                 break
             }
