@@ -6,11 +6,6 @@
 //  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
-//TO-DO
-//The Done button should be disabled if the user has not made any editing since the beginning of the puzzle or since the last time the same button has been pressed.
-
-
-
 import UIKit
 import NotificationBannerSwift
 
@@ -49,7 +44,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var sol = ""
     var doneButtonLabel="DONE"
     var attemptCount = 1, successCount = 0, skipCount = 0
-    
+    var n1Assign: Double = 1, n2Assign: Double=1, n3Assign: Double=1, n4Assign: Double=1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +127,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }))
             self.present(alert, animated: true, completion: nil)
         }
-            
         else
         {
             let alert = UIAlertController(title: "Solution", message: "Sorry, there are actually no solutions", preferredStyle: UIAlertControllerStyle.alert)
@@ -149,6 +143,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func assignNumbersAction(_ sender: UIBarButtonItem) {
+        n1Assign = 1
+        n2Assign = 1
+        n3Assign = 1
+        n4Assign = 1
         
         let alert = UIAlertController(title: "Assign Numbers", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         alert.isModalInPopover = true
@@ -362,7 +360,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //////////Assign Numbers Alert-Picker//////////
     var n1pickerData:[[Int]] = [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]
     var pickerView = UIPickerView()
-    var n1Assign: Double = 1, n2Assign: Double=1, n3Assign: Double=1, n4Assign: Double=1
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return n1pickerData.count
