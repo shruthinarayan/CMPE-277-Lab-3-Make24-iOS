@@ -6,17 +6,18 @@
 //  Copyright © 2018 Shruthi Narayan. All rights reserved.
 //
 
-//////////////FIX: calculate expression issue
-//////////////enable random for showme,done
+//TO-DO
+//The Done button should be disabled if the user has not made any editing since the beginning of the puzzle or since the last time the same button has been pressed.
+
 
 
 import UIKit
 import NotificationBannerSwift
 
-
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    //////////UI connections//////////
+    
+    //////////UI Connections//////////
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var successLabel: UILabel!
     @IBOutlet weak var attemptLabel: UILabel!
@@ -39,19 +40,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var delButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    //////////Declare variables //////////
+    
+    //////////Declare Variables //////////
     var n1: Double = 0, n2: Double = 0, n3: Double = 0, n4: Double = 0
     var timer = Timer()
     var time = 0
     var str = ""
     var sol = ""
-    var done="DONE"
+    var doneButtonLabel="DONE"
     var attemptCount = 1, successCount = 0, skipCount = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
         //////////Add Borders//////////
         timeLabel.layer.borderWidth = 1.0
@@ -76,6 +79,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         delButton.layer.borderWidth = 1.0
         doneButton.layer.borderWidth = 1.0
         
+        
         //////////First Game on App Load//////////
         randomNumberGenerator()
         setTitleEnableButtonsInit()
@@ -83,8 +87,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         skippedLabel.text="\(skipCount)"
         successLabel.text="\(successCount)"
-        doneButton.setTitle("\(done)", for: .normal)
+        doneButton.setTitle("\(doneButtonLabel)", for: .normal)
     }
+    
     
     //////////Button Actions//////////
     @IBAction func clearAction(_ sender: UIBarButtonItem) {
@@ -118,21 +123,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if !(sol.isEmpty)
         {
             let alert = UIAlertController(title: "Solution", message: "\(sol)=24", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
+            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:{ (UIAlertAction) in
+                self.randomNumberGenerator()
+                self.setTitleEnableButtonsInit()
+                self.skipCount+=1
+                //print("\(skipCount)")
+                self.skippedLabel.text="\(self.skipCount)"
+            }))
             self.present(alert, animated: true, completion: nil)
         }
+            
         else
         {
             let alert = UIAlertController(title: "Solution", message: "Sorry, there are actually no solutions", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:nil))
+            alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler:{ (UIAlertAction) in
+                self.randomNumberGenerator()
+                self.setTitleEnableButtonsInit()
+                self.skipCount+=1
+                //print("\(skipCount)")
+                self.skippedLabel.text="\(self.skipCount)"
+            }))
             self.present(alert, animated: true, completion: nil)
         }
-        
-        //self.randomNumberGenerator()
-        self.setTitleEnableButtonsInit()
-        self.skipCount+=1
-        //print("\(skipCount)")
-        self.skippedLabel.text="\(self.skipCount)"
     }
     
     
@@ -154,11 +166,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.n3=self.n3Assign
             self.n4=self.n4Assign
             
-            self.setTitleEnableButtonsInit()
+            if (self.doneButton.isEnabled==true)
+            {
+                self.skipCount+=1
+                print("\(self.skipCount)")
+                self.skippedLabel.text="\(self.skipCount)"
+            }
             
-            self.skipCount+=1
-            //print("\(skipCount)")
-            self.skippedLabel.text="\(self.skipCount)"
+            self.setTitleEnableButtonsInit()
         }))
         self.present(alert,animated: true, completion: nil )
     }
@@ -251,14 +266,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //print("\(attemptCount)")
         attemptLabel.text="\(attemptCount)"
         
+        let expression = NSExpression(format: str)
+        print("\(expression)")
+        let calculatedValue =  expression.expressionValue(with: nil, context:nil) as! Int    //force case it to an Int
+        print("\(calculatedValue)")
+        
+        //        if (calculatedValue == 24)
+        //        {
+        //            print ("calculatedvalue is 24")
+        //        }
+        
         //////////Alert & NotificationBanner//////////
-        let done = calculateResult(exp: str)
-        print("\(done)")
-        if ((done == true) && (n1Button.isEnabled == false) && (n2Button.isEnabled == false) && (n3Button.isEnabled == false) && (n4Button.isEnabled == false))
+        if ((calculatedValue == 24) && (n1Button.isEnabled == false) && (n2Button.isEnabled == false) && (n3Button.isEnabled == false) && (n4Button.isEnabled == false))
         {
             let alert = UIAlertController(title: "Success!", message: "Binggo! \(str) = 24", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "New Puzzle", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                // self.randomNumberGenerator()
+                self.randomNumberGenerator()
                 self.setTitleEnableButtonsInit()
                 self.successCount += 1
                 self.successLabel.text = "\(self.successCount)"
@@ -289,6 +312,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    //////////Set Button Titles, Enable Buttons, Disable Done, Init time/str/attempt //////////
     func setTitleEnableButtonsInit(){
         //set value on buttons
         n1Button.setTitle("\(Int(n1))", for: .normal)
@@ -315,7 +339,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         attemptLabel.text="\(attemptCount)"
     }
     
-    //////////Build a Timer//////////
+    //////////Build Timer//////////
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(incrementTime), userInfo: nil, repeats: true)
     }
