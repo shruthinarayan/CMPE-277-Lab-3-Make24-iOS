@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Lab3Make24.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>D5CA432E346D57734930F40BED611B27AA601165</string>
+				<key>dateExpires</key>
+				<string>5/13/19</string>
+				<key>type</key>
+				<string>iOS Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>D5CA432E346D57734930F40BED611B27AA601165</string>
+						<key>dateExpires</key>
+						<string>5/13/19</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>MarqueeLabel.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>7BHCDJ55EZ</string>
+						<key>name</key>
+						<string>San Jose State University (Computer Engineering)</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>D5CA432E346D57734930F40BED611B27AA601165</string>
+						<key>dateExpires</key>
+						<string>5/13/19</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>NotificationBannerSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>7BHCDJ55EZ</string>
+						<key>name</key>
+						<string>San Jose State University (Computer Engineering)</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>D5CA432E346D57734930F40BED611B27AA601165</string>
+						<key>dateExpires</key>
+						<string>5/13/19</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>SnapKit.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>7BHCDJ55EZ</string>
+						<key>name</key>
+						<string>San Jose State University (Computer Engineering)</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>7DS9AFYN7Y.edu.sjsu.cmpe.277.Lab3Make24</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>7BHCDJ55EZ</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>7DS9AFYN7Y.edu.sjsu.cmpe.277.Lab3Make24</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>Lab3Make24.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>fdc4c4a9-2f6a-4595-b1b9-e52c496a1131</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: *</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>7BHCDJ55EZ</string>
+				<key>name</key>
+				<string>San Jose State University (Computer Engineering)</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
